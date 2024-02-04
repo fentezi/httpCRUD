@@ -19,6 +19,10 @@ func main() {
 	memoryStorage := handlers.NewBook()
 	handle := handlers.NewHandler(memoryStorage)
 	r := mux.NewRouter()
+<<<<<<< HEAD
+=======
+	log.Printf("Запуск сервера!")
+>>>>>>> 39e2253 (First commit)
 	r.HandleFunc("/books", handle.GetAllBooks).Methods("GET")
 	r.HandleFunc("/book/{id}", handle.GetBook).Methods("GET")
 	r.HandleFunc("/book", handle.CreateBook).Methods("POST")
