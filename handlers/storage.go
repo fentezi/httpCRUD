@@ -2,10 +2,7 @@ package handlers
 
 import (
 	"github.com/fentezi/httpCRUD/database"
-<<<<<<< HEAD
-=======
 	"sync"
->>>>>>> 39e2253 (First commit)
 )
 
 type Book struct {
@@ -24,29 +21,21 @@ type Storage interface {
 	DeleteBook(id int) error
 }
 
+var mu sync.Mutex
+
 func NewBook() *Book {
 	return &Book{}
 }
 
-<<<<<<< HEAD
-func (n *Book) GetBook(id int) (Book, error) {
-	b := Book{} // Создаем Book заранее
-=======
-var mu sync.Mutex
-
 func (n *Book) GetBook(id int) (Book, error) {
 	b := Book{}
->>>>>>> 39e2253 (First commit)
 	err := database.DB.QueryRow("SELECT * FROM book WHERE id = $1", id).Scan(&b.ID, &b.Title, &b.Description, &b.Author, &b.Isbn)
 	return b, err
 }
 
 func (n *Book) CreateBook(book Book) error {
-<<<<<<< HEAD
-=======
 	mu.Lock()
 	defer mu.Unlock()
->>>>>>> 39e2253 (First commit)
 	stmt, err := database.DB.Prepare("INSERT INTO book(title, description, author, isbn) VALUES ($1, $2, $3, $4)")
 	if err != nil {
 		return err
@@ -58,11 +47,8 @@ func (n *Book) CreateBook(book Book) error {
 }
 
 func (n *Book) DeleteBook(id int) error {
-<<<<<<< HEAD
-=======
 	mu.Lock()
 	defer mu.Unlock()
->>>>>>> 39e2253 (First commit)
 	stmt, err := database.DB.Prepare("DELETE FROM book WHERE id=$1")
 	if err != nil {
 		return err
@@ -74,11 +60,8 @@ func (n *Book) DeleteBook(id int) error {
 }
 
 func (n *Book) UpdateBook(id int, book Book) error {
-<<<<<<< HEAD
-=======
 	mu.Lock()
 	defer mu.Unlock()
->>>>>>> 39e2253 (First commit)
 	stmt, err := database.DB.Prepare("UPDATE book SET title=$1, description=$2, author=$3, isbn=$4 WHERE id=$5")
 	if err != nil {
 		return err
